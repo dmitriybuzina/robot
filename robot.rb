@@ -1,8 +1,7 @@
 class Robot
-  @@look = [:NORTH, :EAST, :SOUTH, :WEST]
-  attr_accessor :x,
-                :y,
-                :f
+  attr_accessor :x, :y, :f
+
+  @@look = %i[NORTH EAST SOUTH WEST]
 
   def initialize(x, y, f)
     @x = x
@@ -14,12 +13,12 @@ class Robot
     puts "Robot position: #{@x}, #{@y}, #{@f} "
   end
 
-  def rotation command
+  def rotation(command)
     index = @@look.index(@f)
     if command == :RIGHT
-      index != @@look.length - 1 ? @f = @@look[index + 1] : @f = @@look[0]
+      @f = index != @@look.length - 1 ? @@look[ index + 1 ] : @@look[0]
     elsif command == :LEFT
-      index.zero? ?  @f = @@look[@@look.length - 1] : @f = @@look[index - 1]
+      @f = @@look[ index - 1 ]
     end
   end
 
